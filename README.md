@@ -68,8 +68,8 @@ Path: pycore/tikzeng.py
 
 - Modify to_Conv function
     - Input parameters changed from "s_fiter, n_filter" to "x, y, n_filter"
-        - x: depth
-        - y: height
+        - x: depth (the length of feature map)
+        - y: height (the width of feature map)
         - n_filter: width (number of the convolution kernel)
 
 - Add to_ConvRelu function
