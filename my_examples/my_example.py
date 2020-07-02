@@ -14,7 +14,7 @@ arch = [
     to_head( '..' ),
     to_cor(),
     to_begin(),
-    to_Conv("input", 32, 40, offset="(0,0,0)", to="(0,0,0)", width=1, height=40, depth=32, caption="Input"),
+    to_Conv("input", 32, 40, "", offset="(0,0,0)", to="(0,0,0)", width=1, height=40, depth=32, caption="Input"),
     to_ConvRelu("conv1", 32, 12, 32, offset="(3,0,0)", to="(input-east)", width=5, height=32, depth=32, caption="Conv1" ),
     to_ConvRelu("conv2", 32, 4, 32, offset="(3,0,0)", to="(conv1-east)", width=5, height=12, depth=32 ,caption="Conv2"),
 
