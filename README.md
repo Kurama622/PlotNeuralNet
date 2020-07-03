@@ -60,8 +60,6 @@ Path: pycore/tikzeng.py
 
 - Modify SoftmaxColor
 
-- Add SoftmaxReluColor
-
 - Add to_Linear function
 
 - Add to_LinearRelu function
