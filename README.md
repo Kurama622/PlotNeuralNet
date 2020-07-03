@@ -80,11 +80,20 @@ More details at [tikzeng.py](./pycore/tikzeng.py)
 
 ## My example
 
-<center>
-<img src="./my_examples/my_example0001-1.png" alt="my_example" height="85%" width="85%" />
-</center>
+<p align="center"><img  src="./my_examples/my_example0001-1.png" width="85%" height="85%"></p>
+<h6 align="center">my example</h6>
 
 Code of the example in [my_example.py](./my_examples/my_example.py)
+
+<p align="center"><img  src="./pyexamples/test_simple0001-1.png" width="50%" height="50%"></p>
+<h6 align="center">test_simple</h6>
+
+Code of the example in [test_simple.py](./pyexamples/test_simple.py)
+
+<p align="center"><img  src="./pyexamples/unet0001-1.png" width="85%" height="85%"></p>
+<h6 align="center">unet</h6>
+
+Code of the example in [unet.py](./pyexamples/unet.py)
 
 The following is the original description
 
