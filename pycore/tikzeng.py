@@ -92,7 +92,7 @@ def to_LinearRelu(name, n_unit=64, offset="(0,0,0)", to="(0,0,0)", width=1.5, he
     # };
 # """
 # my_Conv
-def to_Conv( name, x=256, y=256, n_filer=64, offset="(0,0,0)", to="(0,0,0)", width=1, height=40, depth=40, caption=" " ):
+def to_Conv( name, x=256, y="", n_filer=64, offset="(0,0,0)", to="(0,0,0)", width=1, height=40, depth=40, caption=" " ):
     return r"""
 \pic[shift={"""+ offset +"""}] at """+ to +""" 
     {Box={

@@ -76,7 +76,7 @@ Path: pycore/tikzeng.py
 
 More details at [tikzeng.py](./pycore/tikzeng.py)
 
-Examples in `pyexamples` will not be able to generate the correct structure diagram.
+
 
 ## My example
 
