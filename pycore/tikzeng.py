@@ -17,6 +17,7 @@ def to_cor():
 \def\ConvColor{rgb:yellow,5;red,2.5;white,5}
 \def\ConvReluColor{rgb:yellow,5;red,5;white,5}
 \def\PoolColor{rgb:red,1;black,0.3}
+\def\PoolReluColor{rgb:red,2;black,0.3}
 \def\UnpoolColor{rgb:blue,2;green,1;black,0.3}
 \def\FcColor{rgb:blue,5;red,2.5;white,5}
 \def\FcReluColor{rgb:blue,5;red,5;white,4}
@@ -42,14 +43,13 @@ def to_input( pathfile, to='(-3,0,0)', width=8, height=8, name="temp" ):
 """
 
 # linear
-def to_Linear(name, n_unit=64, offset="(0,0,0)", to="(0,0,0)", width=1.5, height=3, depth=25, opacity=0.8, caption=" "):
+def to_Linear(name, pos='z', n_unit=64, offset="(0,0,0)", to="(0,0,0)", width=1.5, height=3, depth=25, opacity=0.8, caption=" "):
     return r"""
 \pic[shift={"""+ offset +"""}] at """+ to +"""
     {Box={
         name=""" + name +""",
         caption="""+ caption +""",
-        xlabel={{" ","dummy"}},
-        zlabel="""+ str(n_unit) +""",
+        xlabel={{" ","dummy"}},\n"""+ pos +"""label="""+ str(n_unit) +""",
         fill=\ConvColor,
         opacity="""+ str(opacity) +""",
         height="""+ str(height) +""",
@@ -59,14 +59,13 @@ def to_Linear(name, n_unit=64, offset="(0,0,0)", to="(0,0,0)", width=1.5, height
     };
 """
 # Linear Relu
-def to_LinearRelu(name, n_unit=64, offset="(0,0,0)", to="(0,0,0)", width=1.5, height=3, depth=25, opacity=0.8, caption=" "):
+def to_LinearRelu(name, pos='z', n_unit=64, offset="(0,0,0)", to="(0,0,0)", width=1.5, height=3, depth=25, opacity=0.8, caption=" "):
     return r"""
 \pic[shift={"""+ offset +"""}] at """+ to +"""
     {RightBandedBox={
         name=""" + name +""",
         caption="""+ caption +""",
-        xlabel={{" ","dummy"}},
-        zlabel="""+ str(n_unit) +""",
+        xlabel={{" ","dummy"}},\n"""+ pos +"""label="""+ str(n_unit) +""",
         fill=\ConvColor,
         bandfill=\ConvReluColor,
         opacity="""+ str(opacity) +""",
@@ -151,14 +150,36 @@ def to_ConvConvRelu( name, s_filer=256, n_filer=(64,64), offset="(0,0,0)", to="(
 
 
 # Pool
-def to_Pool(name, offset="(0,0,0)", to="(0,0,0)", width=1, height=32, depth=32, opacity=0.5, caption=" "):
+def to_Pool(name, x='', y='', n_filer='',offset="(0,0,0)", to="(0,0,0)", width=1, height=32, depth=32, opacity=0.5, caption=" "):
     return r"""
 \pic[shift={ """+ offset +""" }] at """+ to +""" 
     {Box={
         name="""+name+""",
         caption="""+ caption +r""",
+        xlabel={{"""+ str(n_filer) +""", }},
+        ylabel="""+ str(y) +""",
+        zlabel="""+ str(x) +""",
         fill=\PoolColor,
         opacity="""+ str(opacity) +""",
+        height="""+ str(height) +""",
+        width="""+ str(width) +""",
+        depth="""+ str(depth) +"""
+        }
+    };
+"""
+# pool, Relu
+def to_PoolRelu(name, x='', y='', n_filer='',offset="(0,0,0)", to="(0,0,0)", width=1, height=32, depth=32, opacity=0.5, caption=" "):
+    return r"""
+\pic[shift={ """+ offset +""" }] at """+ to +""" 
+    {RightBandedBox={
+        name="""+ name +""",
+        caption="""+ caption +""",
+        xlabel={{"""+ str(n_filer) +""", }},
+        ylabel="""+ str(y) +""",
+        zlabel="""+ str(x) +""",
+        fill=\PoolColor,
+        bandfill=\PoolReluColor,
+        %bandfill=\ConvReluColor,
         height="""+ str(height) +""",
         width="""+ str(width) +""",
         depth="""+ str(depth) +"""
@@ -202,6 +223,22 @@ def to_ConvRes( name, s_filer=256, n_filer=64, offset="(0,0,0)", to="(0,0,0)", w
     };
 """
 
+# flatten
+def to_Flatten(name, pos='z', n_unit=64, offset="(0,0,0)", to="(0,0,0)", width=1.5, height=3, depth=25, opacity=0.8, caption=" "):
+    return r"""
+\pic[shift={"""+ offset +"""}] at """+ to +"""
+    {Box={
+        name=""" + name +""",
+        caption="""+ caption +""",
+        xlabel={{" ","dummy"}},\n"""+ pos +"""label="""+ str(n_unit) +""",
+        fill=\SoftmaxColor,
+        opacity="""+ str(opacity) +""",
+        height="""+ str(height) +""",
+        width="""+ str(width) +""",
+        depth="""+ str(depth) +"""
+        }
+    };
+"""
 
 # ConvSoftMax
 def to_ConvSoftMax( name, s_filer=40, offset="(0,0,0)", to="(0,0,0)", width=1, height=40, depth=40, caption=" " ):
@@ -252,6 +289,21 @@ def to_dashed_connection(of, to):
 ("""+of+"""-farnortheast) -- ("""+to+"""-farnorthwest)
 ;
 """
+def to_dashed_connection_half(of, to, connection_part):
+    if connection_part == 'up':
+        return r"""
+    \draw[densely dashed]
+    ("""+of+"""-nearnortheast) -- ("""+to+"""-nearnorthwest)
+    ("""+of+"""-farnortheast) -- ("""+to+"""-farnorthwest)
+    ;
+    """
+    elif connection_part == 'down':
+        return r"""
+    \draw[densely dashed]
+    ("""+of+"""-nearsoutheast) -- ("""+to+"""-nearsouthwest)
+    ("""+of+"""-farsoutheast) -- ("""+to+"""-farsouthwest)
+    ;
+    """
 
 def to_skip( of, to, pos=1.25):
     return r"""

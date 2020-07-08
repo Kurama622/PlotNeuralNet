@@ -21,7 +21,7 @@ index 38818a8..854edbb 100644
 
 
 -        \tikzstyle{captionlabel}=[text width=15*\LastEastx/\scale,text centered]
-+        \tikzstyle{captionlabel}=[text width=40*\LastEastx/\scale,text centered]
++        \tikzstyle{captionlabel}=[text width=2cm,text centered]
          \path (\LastEastx/2,-\y/2,+\z/2) + (0,-25pt) coordinate (cap)
          edge ["\textcolor{black}{ \bf \caption}"',captionlabel](cap) ; %Block caption/pic object label
 
@@ -48,7 +48,7 @@ index 7d74a51..adad188 100644
          \path (b1) edge ["\ylabel",midway] (a1);  %height label
 
 -        \tikzstyle{captionlabel}=[text width=15*\LastEastx/\scale,text centered]
-+        \tikzstyle{captionlabel}=[text width=40*\LastEastx/\scale,text centered]
++        \tikzstyle{captionlabel}=[text width=3cm,text centered]
          \path (\LastEastx/2,-\y/2,+\z/2) + (0,-25pt) coordinate (cap)
          edge ["\textcolor{black}{ \bf \caption}"',captionlabel] (cap); %Block caption/pic object label
 
@@ -60,6 +60,8 @@ Path: pycore/tikzeng.py
 
 - Modify SoftmaxColor
 
+- Add PoolReluColor
+
 - Add to_Linear function
 
 - Add to_LinearRelu function
@@ -70,9 +72,17 @@ Path: pycore/tikzeng.py
         - y: height (the width of feature map)
         - n_filter: width (number of the convolution kernel)
 
+- Modify to_Pool function
+
+- Add to_PoolRelu function
+
 - Add to_ConvRelu function
 
 - Add to_dashed_connection function
+
+- Add to_dashed_connection_half function
+
+- Add to_Flatten function
 
 More details at [tikzeng.py](./pycore/tikzeng.py)
 
@@ -85,17 +95,24 @@ More details at [tikzeng.py](./pycore/tikzeng.py)
 
 Code of the example in [my_example.py](./my_examples/my_example.py)
 
-<p align="center"><img  src="./pyexamples/test_simple0001-1.png" width="50%" height="50%"></p>
-<h6 align="center">test_simple</h6>
+<p align="center"><img  src="./EEGNet/EEGNet0001-1.png" width="85%" height="85%"></p>
+<h6 align="center">EEGNet</h6>
 
-Code of the example in [test_simple.py](./pyexamples/test_simple.py)
+Code of the example in [EEGNet.py](./EEGNet/EEGNet.py)
 
-<p align="center"><img  src="./pyexamples/unet0001-1.png" width="85%" height="85%"></p>
-<h6 align="center">unet</h6>
+<!--<p align="center"><img  src="./pyexamples/test_simple0001-1.png" width="50%" height="50%"></p>-->
+<!--<h6 align="center">test_simple</h6>-->
 
-Code of the example in [unet.py](./pyexamples/unet.py)
+<!--Code of the example in [test_simple.py](./pyexamples/test_simple.py)-->
+
+<!--<p align="center"><img  src="./pyexamples/unet0001-1.png" width="85%" height="85%"></p>-->
+<!--<h6 align="center">unet</h6>-->
+
+<!--Code of the example in [unet.py](./pyexamples/unet.py)-->
+
 
 The following is the original description
+
 
 ---
 # PlotNeuralNet

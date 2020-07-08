@@ -65,7 +65,8 @@
         \path (c) edge ["\small\zlabels"',depthlabel](f); %depth label
         \path (b1) edge ["\ylabel",midway] (a1);  %height label 	  
         
-        \tikzstyle{captionlabel}=[text width=40*\LastEastx/\scale,text centered] 
+        %\tikzstyle{captionlabel}=[text width=40*\LastEastx/\scale,text centered] 
+        \tikzstyle{captionlabel}=[text width=3cm,text centered] 
         \path (\LastEastx/2,-\y/2,+\z/2) + (0,-25pt) coordinate (cap) 
         edge ["\textcolor{black}{ \bf \caption}"',captionlabel] (cap); %Block caption/pic object label
          
